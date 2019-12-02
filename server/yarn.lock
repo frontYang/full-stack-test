@@ -162,27 +162,7 @@ co-body@^6.0.0:
     raw-body "^2.3.3"
     type-is "^1.6.16"
 
-co-from-stream@0.0.0:
-  version "0.0.0"
-  resolved "https://registry.npm.taobao.org/co-from-stream/download/co-from-stream-0.0.0.tgz#1a5cd8ced77263946094fa39f2499a63297bcaf9"
-  integrity sha1-GlzYztdyY5RglPo58kmaYyl7yvk=
-  dependencies:
-    co-read "0.0.1"
-
-co-fs@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.npm.taobao.org/co-fs/download/co-fs-1.2.0.tgz#a6df045ce58c04eed45586ff4385032813aba64e"
-  integrity sha1-pt8EXOWMBO7UVYb/Q4UDKBOrpk4=
-  dependencies:
-    co-from-stream "0.0.0"
-    thunkify "0.0.1"
-
-co-read@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.npm.taobao.org/co-read/download/co-read-0.0.1.tgz#f81b3eb8a86675fec51e3d883a7f564e873c9389"
-  integrity sha1-+Bs+uKhmdf7FHj2IOn9WToc8k4k=
-
-co@^4.0.1, co@^4.6.0:
+co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.npm.taobao.org/co/download/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
   integrity sha1-bqa989hTrlTMuOR7+gvz+QMfsYQ=
@@ -628,14 +608,6 @@ koa-convert@^1.2.0:
     co "^4.6.0"
     koa-compose "^3.0.0"
 
-koa-requireall@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npm.taobao.org/koa-requireall/download/koa-requireall-1.0.0.tgz#a3df1c6ebba8693d6300391cb63e21321c3b1d59"
-  integrity sha1-o98cbruoaT1jADkctj4hMhw7HVk=
-  dependencies:
-    co "^4.0.1"
-    co-fs "^1.2.0"
-
 koa-router@^7.4.0:
   version "7.4.0"
   resolved "https://registry.npm.taobao.org/koa-router/download/koa-router-7.4.0.tgz#aee1f7adc02d5cb31d7d67465c9eacc825e8c5e0"
@@ -1006,6 +978,11 @@ registry-url@^3.0.3:
   dependencies:
     rc "^1.0.1"
 
+require-all@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npm.taobao.org/require-all/download/require-all-3.0.0.tgz#473d49704be310115ce124f77383b1ebd8671312"
+  integrity sha1-Rz1JcEvjEBFc4ST3c4Ox69hnExI=
+
 require_optional@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/require_optional/download/require_optional-1.0.1.tgz#4cf35a4247f64ca3df8c2ef208cc494b1ca8fc2e"
@@ -1162,11 +1139,6 @@ thenify-all@^1.0.0:
   integrity sha1-5p44obq+lpsBCCB5eLn2K4hgSDk=
   dependencies:
     any-promise "^1.0.0"
-
-thunkify@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.npm.taobao.org/thunkify/download/thunkify-0.0.1.tgz#bd5d36b1069b4078e5dcbac8fab45359bea6183d"
-  integrity sha1-vV02sQabQHjl3LrI+rRTWb6mGD0=
 
 timed-out@^4.0.0:
   version "4.0.1"
