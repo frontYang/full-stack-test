@@ -8,18 +8,20 @@ const port = 3000
 // 连接数据库
 require('./plugins/db')()
 
-const webRoutes = require('./routes/web/index')(app).routes()
-const adminRoutes = require('./routes/admin/index')(app).routes()
+app.use(bodyParser())
+
+const web = require('./routes/web/index')(app)
+const admin = require('./routes/admin/index')(app)
+const resourceMiddleware = require('./middleware/resource')
 
 // 装在所有子路由
-router.use('/api/web/:resource', webRoutes)
-router.use('/api/admin/:resource', adminRoutes)
-
-app.use(bodyParser())
+router.use('/api/admin/:resource', resourceMiddleware(), admin.routes())
+// router.use('/api/web/:resource', web.routes())
 
 // 路由挂载
 app.use(router.routes()).use(router.allowedMethods())
 
+// 监听
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`)
 })

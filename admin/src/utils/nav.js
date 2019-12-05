@@ -13,6 +13,10 @@ export default [
       {
         label: '分类',
         index: '/sys/category'
+      },
+      {
+        label: '文章',
+        index: '/sys/art'
       }
     ]
   },

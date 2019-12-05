@@ -1,12 +1,11 @@
 <template>
   <div class="page">
-    <h2>分类列表</h2>
-    <el-button type="primary" @click="add">新建分类</el-button>
+    <h2>文章列表</h2>
+    <el-button type="primary" @click="add">新建文章</el-button>
 
-    <el-table :data="categoryData">
+    <el-table :data="artData">
       <el-table-column label="ID" type="index"></el-table-column>
-      <el-table-column label="父级" prop="parent.name"></el-table-column>
-      <el-table-column label="名称" prop="name"></el-table-column>
+      <el-table-column label="标题" prop="title"></el-table-column>
       <el-table-column
         fixed="right"
         label="操作"
@@ -18,30 +17,31 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog title="新建分类" :visible.sync="addParams.visible" :id="id">
-      <AddCategory v-model="addParams" @updateData="fetchData"/>
+    <el-dialog title="新建文章" :visible.sync="addParams.visible">
+      <add-art v-model="addParams" @updateData="fetchData"/>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import AddCategory from '@/components/sys/AddCategory'
+import AddArt from '@/components/sys/AddArt'
 export default {
   data() {
     return {
-      id: '',
       addParams: {
+        id: '',
         visible: false,
         model: {
-          parent: '',
-          name: ''
+          categories: '',
+          title: '',
+          body: ''
         }
       },
-      categoryData: []
+      artData: []
     }
   },
   components: {
-    AddCategory
+    AddArt
   },
   mounted() {
     this.fetchData()
@@ -49,23 +49,25 @@ export default {
 
   methods: {
     async fetchData() {
-      const res = await this.$request.getCategoryList()
-      this.categoryData = res.data.list
+      const res = await this.$request.getArtList()
+      this.artData = res.data.list
     },
 
     add() {
       this.addParams = {
         visible: true,
+        id: '',
         model: {}
       }
     },
     edit(row) {
-      this.id = row._id
       this.addParams = {
         visible: true,
+        id: row._id,
         model: {
-          name: row.name,
-          parent: row.parent._id
+          title: row.title,
+          body: row.body,
+          categories: row.categories._id || ''
         }
       }
 
@@ -77,16 +79,16 @@ export default {
     },
     del(row, index) {
       console.log(index)
-      this.$alert('确定要删除此分类', '提示', {
+      this.$alert('确定要删除此文章', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         callback: async action => {
-          const data = await this.$request.delCategory({
+          const data = await this.$request.delArt({
             id: row._id
           })
           console.log(data)
           this.fetchData()
-          // this.categoryData.splice(index, 1)
+          // this.artData.splice(index, 1)
         }
 
       })

@@ -19,9 +19,8 @@ export const DOMAIN = IS_DEV ? DOMAIN_DEV : DOMAIN_PROD
 export const CONFIG = {
   // 接口
   intf: {
-    category: '/api/admin/category',
-    category_del: '/api/admin/category_del',
-    category_list: '/api/admin/category_list',
+    category: '/api/admin/categories',
+    article: '/api/admin/articles',
 
     login: '/api/login',
     list: '/api/list',
@@ -41,5 +40,4 @@ export const CONFIG = {
   },
 
   nav
-
 }

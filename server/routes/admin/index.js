@@ -4,13 +4,14 @@ module.exports = app => {
   const static = require('koa-static')
   const router = new KoaRouter()
   const adminPath = path.resolve(__dirname, '../../', 'public')
-  const Category = require('../../models/Category')
 
   // 获取列表
   router.get('/', async(ctx, next) => {
-    const queryOptions = {}
-    queryOptions.populate = 'parent'
-    const list = await Category.find().setOptions(queryOptions)    
+    const queryOptions = { }
+    if (ctx.req.Model.modelName === 'Category') {
+      queryOptions.populate = 'parent'
+    }
+    const list = await ctx.req.Model.find().setOptions(queryOptions)
     ctx.body = {
       code: 0,
       msg: 'success',
@@ -18,33 +19,32 @@ module.exports = app => {
         list: list
       }
     }
-    next()
+    await next()
   })
 
   // 新建
   router.post('/', async (ctx, next) => {
     const data = ctx.request.body
-    ctx.body = Category.create(data)
-    next()
+    ctx.body = ctx.req.Model.create(data)
+    await next()
   })
 
   // 更新
   router.post('/:_id', async (ctx, next)=> {
     let _id = ctx.params._id
     let data = ctx.request.body
-    ctx.body = await Category.update({_id}, { $set: data }, {
+    ctx.body = await ctx.req.Model.update({_id}, { $set: data }, {
       runValidators: true
     })
-    next()
+    await next()
   })
 
   // 删除资源
   router.post('/:_id', async (ctx, next)=> {
     let _id = ctx.params._id
-    ctx.body = await Category.deleteOne({_id})
-    next()
-  })
-
-  app.use(static(adminPath))
+    ctx.body = await ctx.req.Model.deleteOne({_id})
+    await next()
+  })   
+  app.use(static(adminPath)) 
   return router
 }
